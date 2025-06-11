@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">icao_whitelist_listing.icao_whitelist_listing_data_source</item>
+            <item name="deps" xsi:type="string">icao_whitelist_listing.icao_whitelist_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">whitelist_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add New</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/new</item>
+            </item>
+        </item>
+    </argument>
+
+    <dataSource name="icao_whitelist_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Ui\Component\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">icao_whitelist_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="js_config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <columns name="whitelist_columns">
+        <column name="entity_id">
+            <settings>
+                <filter>text</filter>
+                <sorting>asc</sorting>
+                <label translate="true">Entity ID</label>
+            </settings>
+        </column>
+        <column name="scope">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Scope</label>
+            </settings>
+        </column>
+        <column name="type">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Type</label>
+            </settings>
+        </column>
+        <column name="created_at">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Icao\DataCollection\Ui\Component\Listing\Column\WhitelistActions">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+
+    <settings>
+        <spinner>whitelist_columns</spinner>
+        <deps>
+            <dep>icao_whitelist_listing.icao_whitelist_listing_data_source</dep>
+        </deps>
+    </settings>
+</listing>

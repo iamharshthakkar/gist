@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Repository for whitelist -->
+    <preference for="Icao\DataCollection\Api\WhitelistRepositoryInterface"
+                type="Icao\DataCollection\Model\WhitelistRepository"/>
+
+    <!-- Main DataCollection implementation -->
+    <preference for="Icao\DataCollection\Api\DataCollectionInterface"
+                type="Icao\DataCollection\Model\DataCollection"/>
+
+</config>
