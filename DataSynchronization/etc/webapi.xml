@@ -1,12 +1,27 @@
 <?xml version="1.0"?>
-<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <route url="/V1/data-collection/:scope" method="POST">
-        <service class="Icao\DataSynchronization\Api\DataSynchronizationInterface" method="append"/>
-        <resources><resource ref="Icao_DataSynchronization::write"/></resources>
+<!--
+/**
+ * Web API configuration for the Icao_DataSynchronization module.
+ * Defines the REST API endpoint for synchronizing generic data.
+ *
+ * Route: /V1/icao-datasynchronization/data
+ * Method: POST
+ * Service: Icao\DataSynchronization\Api\DataSynchronizationInterface::syncData
+ * Resources: anonymous (for demonstration, consider restricting access for production)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Webapi/etc/webapi.xsd">
+    <route url="/V1/icao-datasynchronization/data" method="POST">
+        <!-- Define the service interface and method that will handle this API call. -->
+        <service class="Icao\DataSynchronization\Api\DataSynchronizationInterface" method="syncData"/>
+        <resources>
+            <!--
+            WARNING: 'anonymous' allows unauthenticated access. For production environments
+            with sensitive data, you MUST replace this with a specific ACL resource
+            (e.g., <resource ref="Icao_DataSynchronization::api_sync_data"/>) and configure
+            it in your module's etc/acl.xml for proper authentication and authorization.
+            -->
+            <resource ref="anonymous"/>
+        </resources>
     </route>
-    <route url="/V1/data-collection/:scope" method="PUT">
-        <service class="Icao\DataSynchronization\Api\DataSynchronizationInterface" method="replace"/>
-        <resources><resource ref="Icao_DataSynchronization::write"/></resources>
-    </route>
-</routes>
+</config>

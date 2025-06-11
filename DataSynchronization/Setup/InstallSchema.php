@@ -2,56 +2,76 @@
 namespace Icao\DataSynchronization\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
-use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\DB\Ddl\Table;
 
+/**
+ * InstallSchema class for Icao_DataSynchronization module.
+ * Creates the static 'icao_data_synchronization_whitelist' table.
+ *
+ * NOTE: This InstallSchema is ONLY for the static 'whitelist' table.
+ * Dynamic tables created via API are handled by DataSynchronization.php at runtime.
+ */
 class InstallSchema implements InstallSchemaInterface
 {
+    /**
+     * Install DB schema for a module
+     *
+     * @param SchemaSetupInterface $setup
+     * @param ModuleContextInterface $context
+     * @return void
+     * @throws \Zend_Db_Exception
+     */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         $installer = $setup;
         $installer->startSetup();
 
-        // Whitelist
-        if (!$installer->tableExists('icao_data_synchronization_whitelist')) {
-            $t = $installer->getConnection()->newTable(
-                $installer->getTable('icao_data_synchronization_whitelist')
-            )->addColumn('entity_id', Table::TYPE_INTEGER, null, [
-                    'identity'=>true,'unsigned'=>true,'nullable'=>false,'primary'=>true
-                ], 'Entity ID'
-            )->addColumn('scope', Table::TYPE_TEXT, 128, ['nullable'=>false], 'Scope')
-             ->addColumn('type', Table::TYPE_TEXT, 128, ['nullable'=>false], 'Type')
-             ->addColumn('created_at', Table::TYPE_TIMESTAMP, null, [
-                    'nullable'=>false,'default'=>Table::TIMESTAMP_INIT
-                ], 'Created At'
-             )->addIndex(
-                 $installer->getIdxName('icao_data_synchronization_whitelist', ['scope','type'], \Magento\Framework\DB\Adapter\Pdo\Mysql::INDEX_TYPE_UNIQUE),
-                 ['scope','type'], ['type'=>\Magento\Framework\DB\Adapter\Pdo\Mysql::INDEX_TYPE_UNIQUE]
-             )->setComment('ICAO Data Synchronization Whitelist');
-            $installer->getConnection()->createTable($t);
-        }
+        // Get database connection
+        $connection = $installer->getConnection();
 
-        // Payloads
-        if (!$installer->tableExists('icao_data_synchronization_payload')) {
-            $t = $installer->getConnection()->newTable(
-                $installer->getTable('icao_data_synchronization_payload')
-            )->addColumn('id', Table::TYPE_BIGINT, null, [
-                    'identity'=>true,'unsigned'=>true,'nullable'=>false,'primary'=>true
-                ], 'ID'
-            )->addColumn('scope', Table::TYPE_TEXT, 128, ['nullable'=>false], 'Scope')
-             ->addColumn('type', Table::TYPE_TEXT, 128, ['nullable'=>false], 'Type')
-             ->addColumn('payload', Table::TYPE_TEXT, '2M', ['nullable'=>false], 'JSON Payload')
-             ->addColumn('created_at', Table::TYPE_TIMESTAMP, null, [
-                    'nullable'=>false,'default'=>Table::TIMESTAMP_INIT
-                ], 'Created At'
-             )->addIndex(
-                 $installer->getIdxName('icao_data_synchronization_payload', ['scope','type']),
-                 ['scope','type']
-             )->setComment('ICAO Data Synchronization Payloads');
-            $installer->getConnection()->createTable($t);
-        }
+        // Define table name for whitelist
+        $tableName = $installer->getTable('icao_data_synchronization_whitelist');
 
-        $installer->endSetup();
+        // Check if the table already exists
+        if ($connection->isTableExists($tableName) !== true) {
+            $table = $connection->newTable(
+                $tableName
+            )->addColumn(
+                'entity_id',
+                Table::TYPE_INTEGER,
+                null,
+                [
+                    'identity' => true,
+                    'nullable' => false,
+                    'primary'  => true,
+                    'unsigned' => true,
+                ],
+                'Whitelist ID'
+            )->addColumn(
+                'scope',
+                Table::TYPE_TEXT,
+                255,
+                ['nullable' => false],
+                'Data Scope (e.g., product, category, customer)'
+            )->addColumn(
+                'type',
+                Table::TYPE_TEXT,
+                255,
+                ['nullable' => false],
+                'Data Type within Scope (e.g., sku, email, id)'
+            )->addColumn(
+                'created_at',
+                Table::TYPE_TIMESTAMP,
+                null,
+                ['nullable' => false, 'default' => Table::TIMESTAMP_INIT],
+                'Creation Time'
+            )->setComment(
+                'Icao Data Synchronization Whitelist Table'
+            );
+            $connection->createTable($table);
+            $installer->endSetup();
+        }
     }
 }

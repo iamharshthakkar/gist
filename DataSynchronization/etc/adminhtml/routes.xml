@@ -1,8 +1,13 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+<!--
+/**
+ * Adminhtml routes for the Icao_DataSynchronization module.
+ * Defines the administration area routing for the Whitelist CRUD operations.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="admin">
-        <route id="data_synchronization" frontName="data_synchronization">
+        <route id="icao_datasynchronization" frontName="icao_datasynchronization">
             <module name="Icao_DataSynchronization" before="Magento_Backend"/>
         </route>
     </router>

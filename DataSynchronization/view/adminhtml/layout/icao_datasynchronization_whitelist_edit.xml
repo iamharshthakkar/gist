@@ -2,7 +2,7 @@
 <!--
 /**
  * Adminhtml layout for the Whitelist edit/new form page, using UI Components.
- * This file now renders the UI Component form instead of traditional blocks.
+ * This file renders the UI Component form instead of traditional blocks.
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">

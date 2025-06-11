@@ -60,8 +60,12 @@ class Save extends Action
 
             // Important: if your form fields are nested (e.g., whitelist[scope]),
             // you might need to extract the relevant array: $data = $data['whitelist'];
-            // For this example, assuming direct fields.
-            $model->setData($data);
+            // For this example, assuming direct fields or DataProvider handles extraction.
+            if (isset($data['whitelist'])) { // Check if data is nested under 'whitelist'
+                $model->setData($data['whitelist']);
+            } else {
+                $model->setData($data);
+            }
 
             try {
                 $model->save();

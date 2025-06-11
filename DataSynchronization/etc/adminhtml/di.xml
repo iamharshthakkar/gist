@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Adminhtml Dependency Injection (DI) configuration for the Icao_DataSynchronization module.
+ * This file defines configurations specific to the Magento admin panel,
+ * particularly for UI Component data providers for the Whitelist grid and form.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- DataProvider for the Whitelist Listing (Grid) UI Component -->
+    <!-- This virtual type defines how the UI Component listing's collection is instantiated. -->
+    <virtualType name="Icao\DataSynchronization\Model\ResourceModel\Whitelist\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">icao_data_synchronization_whitelist</argument>
+            <argument name="resourceModel" xsi:type="string">Icao\DataSynchronization\Model\ResourceModel\Whitelist</argument>
+        </arguments>
+    </virtualType>
+    <!-- This type defines the collection factory for the UI Component data provider. -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="icao_datasynchronization_whitelist_listing_data_source" xsi:type="string">Icao\DataSynchronization\Model\ResourceModel\Whitelist\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- DataProvider for the Whitelist Form UI Component -->
+    <!-- This type defines the data provider for the form, which loads data for editing. -->
+    <type name="Icao\DataSynchronization\Model\Whitelist\DataProvider">
+        <arguments>
+            <argument name="collectionFactory" xsi:type="object">Icao\DataSynchronization\Model\ResourceModel\Whitelist\CollectionFactory</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+            <argument name="meta" xsi:type="array">
+                <!-- This item might be used if the DataProvider needs to know about a related listing component -->
+                <item name="listing_page_component_name" xsi:type="string">icao_datasynchronization_whitelist_listing</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -44,7 +44,7 @@
             <item name="config" xsi:type="array">
                 <item name="class" xsi:type="string">messages</item>
                 <item name="formElement" xsi:type="string">container</item>
-                <item name="is	Contained" xsi:type="boolean">true</item>
+                <item name="isContained" xsi:type="boolean">true</item>
                 <item name="template" xsi:type="string">ui/form/components/complex</item>
             </item>
         </argument>
@@ -98,13 +98,29 @@
                 </item>
             </argument>
         </button>
+        <!-- Save and Continue Edit Button (optional but good for usability) -->
+        <button name="save_and_continue" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="class" xsi:type="string">save</item>
+                    <item name="label" xsi:type="string" translate="true">Save and Continue Edit</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">icao_datasynchronization_whitelist_form.icao_datasynchronization_whitelist_form_data_source</item>
+                            <item name="actionName" xsi:type="string">save</item>
+                            <item name="params" xsi:type="array">
+                                <item name="0" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </button>
     </container>
-
-    <fieldset name="whitelist_details">
+    <fieldset name="general">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string" translate="true">Whitelist Information</item>
-                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">General Information</item>
             </item>
         </argument>
         <field name="entity_id">
@@ -114,34 +130,35 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">whitelist</item>
+                    <item name="dataScope" xsi:type="string">entity_id</item>
                 </item>
             </argument>
         </field>
         <field name="scope">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Scope</item>
+                    <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">whitelist</item>
+                    <item name="dataScope" xsi:type="string">scope</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
                     </item>
-                    <item name="placeholder" xsi:type="string" translate="true">e.g., product, category, customer</item>
                 </item>
             </argument>
         </field>
         <field name="type">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Type</item>
+                    <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">whitelist</item>
+                    <item name="dataScope" xsi:type="string">type</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
                     </item>
-                    <item name="placeholder" xsi:type="string" translate="true">e.g., sku, email, id</item>
                 </item>
             </argument>
         </field>

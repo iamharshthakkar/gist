@@ -1,35 +1,15 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Icao\DataSynchronization\Api\WhitelistRepositoryInterface"
-                type="Icao\DataSynchronization\Model\WhitelistRepository"/>
-    <preference for="Icao\DataSynchronization\Api\DataSynchronizationInterface"
-                type="Icao\DataSynchronization\Model\DataSynchronization"/>
+<!--
+/**
+ * Global Dependency Injection (DI) configuration for the Icao_DataSynchronization module.
+ * This file defines preferences for global interfaces to their concrete implementations.
+ * It is used for services accessible throughout the application, including Web APIs.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Preference for the Data Synchronization API Interface -->
+    <preference for="Icao\DataSynchronization\Api\DataSynchronizationInterface" type="Icao\DataSynchronization\Model\DataSynchronization"/>
 
-    <!-- DataProvider for the Whitelist Listing (Grid) UI Component -->
-    <virtualType name="Icao\DataSynchronization\Model\ResourceModel\Whitelist\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
-        <arguments>
-            <argument name="mainTable" xsi:type="string">icao_data_synchronization_whitelist</mainTable>
-            <argument name="resourceModel" xsi:type="string">Icao\DataSynchronization\Model\ResourceModel\Whitelist</argument>
-        </arguments>
-    </virtualType>
-    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
-        <arguments>
-            <argument name="collections" xsi:type="array">
-                <item name="icao_datasynchronization_whitelist_listing_data_source" xsi:type="string">Icao\DataSynchronization\Model\ResourceModel\Whitelist\Grid\Collection</item>
-            </argument>
-        </arguments>
-    </type>
-
-    <!-- DataProvider for the Whitelist Form UI Component -->
-    <type name="Icao\DataSynchronization\Model\Whitelist\DataProvider">
-        <arguments>
-            <argument name="collectionFactory" xsi:type="object">Icao\DataSynchronization\Model\ResourceModel\Whitelist\CollectionFactory</argument>
-            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
-            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
-            <argument name="meta" xsi:type="array">
-                <item name="listing_page_component_name" xsi:type="string">icao_datasynchronization_whitelist_listing</item>
-            </argument>
-        </arguments>
-    </type>
+    <!-- Preference for the Whitelist Repository Interface (for CRUD operations on Whitelist entity) -->
+    <preference for="Icao\DataSynchronization\Api\WhitelistRepositoryInterface" type="Icao\DataSynchronization\Model\WhitelistRepository"/>
 </config>

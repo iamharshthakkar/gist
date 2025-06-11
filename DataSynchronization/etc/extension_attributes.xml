@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento 2 Extension Attributes configuration for the Icao_DataSynchronization module.
+ * This file defines extension attributes for existing data interfaces or custom ones.
+ * For the Whitelist, it ensures that Magento's extensible data functionality is available.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/extension_attributes.xsd">
+    <!-- Define extension attributes for the WhitelistInterface -->
+    <extension_attributes for="Icao\DataSynchronization\Api\WhitelistInterface">
+        <!-- Add any custom extension attributes here if needed for the Whitelist entity.
+             For example:
+        <attribute code="custom_field" type="string" />
+        <attribute code="another_object" type="Icao\DataSynchronization\Api\Data\AnotherObjectInterface" />
+        -->
+    </extension_attributes>
+</config>

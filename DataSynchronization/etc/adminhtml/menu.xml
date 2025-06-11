@@ -1,19 +1,27 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Menu/etc/menu.xsd">
+<!--
+/**
+ * Adminhtml menu configuration for the Icao_DataSynchronization module.
+ * Adds a new menu item under System -> Other Settings for Whitelist management.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Icao_DataSynchronization::main"
-             title="Data Synchronization"
+        <!-- Parent menu item (e.g., under System) -->
+        <add id="Icao_DataSynchronization::system_configuration"
+             title="Icao Data Synchronization"
              module="Icao_DataSynchronization"
-             sortOrder="110"
-             parent="Magento_Backend::stores"
-             resource="Icao_DataSynchronization::main"/>
-        <add id="Icao_DataSynchronization::whitelist"
+             sortOrder="90"
+             parent="Magento_Backend::system"
+             resource="Icao_DataSynchronization::whitelist"/>
+
+        <!-- Child menu item for Whitelist Management -->
+        <add id="Icao_DataSynchronization::whitelist_management"
              title="Whitelist"
              module="Icao_DataSynchronization"
              sortOrder="10"
-             parent="Icao_DataSynchronization::main"
-             action="data_synchronization/whitelist/index"
+             parent="Icao_DataSynchronization::system_configuration"
+             action="icao_datasynchronization/whitelist/index"
              resource="Icao_DataSynchronization::whitelist"/>
     </menu>
 </config>

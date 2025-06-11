@@ -4,8 +4,8 @@ namespace Icao\DataSynchronization\Controller\Adminhtml\Whitelist;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
-use Icao\DataSynchronization\Model\WhitelistFactory;
 use Magento\Framework\Registry;
+use Icao\DataSynchronization\Model\WhitelistFactory; // Assuming your model factory
 
 /**
  * Controller for editing an existing Whitelist item or preparing a new one using UI Component form.

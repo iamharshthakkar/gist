@@ -1,13 +1,23 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+<!--
+/**
+ * Access Control List (ACL) for the Icao_DataSynchronization module.
+ * Defines the permissions required to access the Whitelist management section in the admin.
+ * Add an ACL resource for the API if not using 'anonymous'.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Icao_DataSynchronization::main" title="Data Synchronization" sortOrder="10">
-                    <resource id="Icao_DataSynchronization::whitelist" title="Manage Whitelist" sortOrder="10"/>
+                <resource id="Magento_Backend::system">
+                    <resource id="Icao_DataSynchronization::system_configuration" title="Icao Data Synchronization" sortOrder="90">
+                        <resource id="Icao_DataSynchronization::whitelist" title="Whitelist" sortOrder="10" />
+                        <!-- Add API resource here if not using 'anonymous' in webapi.xml, e.g.:
+                        <resource id="Icao_DataSynchronization::api_sync_data" title="Data Synchronization API Access" sortOrder="20"/>
+                        -->
+                    </resource>
                 </resource>
-                <resource id="Icao_DataSynchronization::write" title="Use Data Synchronization API" sortOrder="20"/>
             </resource>
         </resources>
     </acl>
