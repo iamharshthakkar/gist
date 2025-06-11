@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento 2 UI Component configuration for Whitelist Form.
+ * This XML defines the structure, fields, and actions for the admin form
+ * used for creating and editing Whitelist items.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">icao_datasynchronization_whitelist_form.icao_datasynchronization_whitelist_form_data_source</item>
+            <item name="deps" xsi:type="string">icao_datasynchronization_whitelist_form.icao_datasynchronization_whitelist_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Whitelist Item Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">icao_datasynchronization_whitelist_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/with-buttons</item>
+    </argument>
+    <dataSource name="icao_datasynchronization_whitelist_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Icao\DataSynchronization\Model\Whitelist\DataProvider</argument>
+            <argument name="name" xsi:type="string">icao_datasynchronization_whitelist_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="icao_datasynchronization/whitelist/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+                <item name="submit_url" xsi:type="url" path="icao_datasynchronization/whitelist/save"/>
+            </item>
+        </argument>
+    </dataSource>
+
+    <container name="top_buttons">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="class" xsi:type="string">messages</item>
+                <item name="formElement" xsi:type="string">container</item>
+                <item name="is	Contained" xsi:type="boolean">true</item>
+                <item name="template" xsi:type="string">ui/form/components/complex</item>
+            </item>
+        </argument>
+        <button name="back">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="url" xsi:type="url" path="*/*/"/>
+                    <item name="class" xsi:type="string">back</item>
+                    <item name="title" xsi:type="string" translate="true">Back</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">*</item>
+                            <item name="actionName" xsi:type="string">redirect</item>
+                            <item name="params" xsi:type="array">
+                                <item name="0" xsi:type="string">*/*/index</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </button>
+        <button name="delete" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="url" xsi:type="url" path="*/*/delete"/>
+                    <item name="class" xsi:type="string">delete</item>
+                    <item name="title" xsi:type="string" translate="true">Delete</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">icao_datasynchronization_whitelist_form.icao_datasynchronization_whitelist_form_data_source</item>
+                            <item name="actionName" xsi:type="string">delete</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </button>
+        <button name="save" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="class" xsi:type="string">primary</item>
+                    <item name="title" xsi:type="string" translate="true">Save</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">icao_datasynchronization_whitelist_form.icao_datasynchronization_whitelist_form_data_source</item>
+                            <item name="actionName" xsi:type="string">save</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </button>
+    </container>
+
+    <fieldset name="whitelist_details">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Whitelist Information</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <field name="entity_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">whitelist</item>
+                </item>
+            </argument>
+        </field>
+        <field name="scope">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Scope</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">whitelist</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="placeholder" xsi:type="string" translate="true">e.g., product, category, customer</item>
+                </item>
+            </argument>
+        </field>
+        <field name="type">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Type</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">whitelist</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="placeholder" xsi:type="string" translate="true">e.g., sku, email, id</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

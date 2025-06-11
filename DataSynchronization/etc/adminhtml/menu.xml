@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Menu/etc/menu.xsd">
+    <menu>
+        <add id="Icao_DataSynchronization::main"
+             title="Data Synchronization"
+             module="Icao_DataSynchronization"
+             sortOrder="110"
+             parent="Magento_Backend::stores"
+             resource="Icao_DataSynchronization::main"/>
+        <add id="Icao_DataSynchronization::whitelist"
+             title="Whitelist"
+             module="Icao_DataSynchronization"
+             sortOrder="10"
+             parent="Icao_DataSynchronization::main"
+             action="data_synchronization/whitelist/index"
+             resource="Icao_DataSynchronization::whitelist"/>
+    </menu>
+</config>

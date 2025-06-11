@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/data-collection/:scope" method="POST">
+        <service class="Icao\DataSynchronization\Api\DataSynchronizationInterface" method="append"/>
+        <resources><resource ref="Icao_DataSynchronization::write"/></resources>
+    </route>
+    <route url="/V1/data-collection/:scope" method="PUT">
+        <service class="Icao\DataSynchronization\Api\DataSynchronizationInterface" method="replace"/>
+        <resources><resource ref="Icao_DataSynchronization::write"/></resources>
+    </route>
+</routes>
